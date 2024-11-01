@@ -34,15 +34,15 @@ const LoanCalculator = () => {
         setInputs({ ...inputs, [name]: formattedValue });
     };
 
-    const calculateLoan = async () => {
-        // Remove commas for backend calculation
-        const sanitizedInputs = {
-            ...inputs,
-            propertyValue: parseInt(inputs.propertyValue.replace(/,/g, '')) || 0,
-            constructionCost: parseInt(inputs.constructionCost.replace(/,/g, '')) || 0,
-            purchasePrice: parseInt(inputs.purchasePrice.replace(/,/g, '')) || 0,
-            arv: parseInt(inputs.arv.replace(/,/g, '')) || 0
-        };
+  const calculateLoan = async () => {
+    // Remove commas for backend calculation
+    const sanitizedInputs = {
+        ...inputs,
+        propertyValue: parseInt(inputs.propertyValue.replace(/,/g, '')) || 0,
+        constructionCost: parseInt(inputs.constructionCost.replace(/,/g, '')) || 0,
+        purchasePrice: parseInt(inputs.purchasePrice.replace(/,/g, '')) || 0,
+        arv: parseInt(inputs.arv.replace(/,/g, '')) || 0
+    };
 
     try {
         const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/calculate-loan`, sanitizedInputs);
@@ -51,7 +51,7 @@ const LoanCalculator = () => {
     } catch (error) {
         console.error("Error calculating loan:", error);
     }
-    };
+};
 
     const generateFormula = (calculatedLoanAmount) => {
         const { propertyValue, ficoScore, constructionCost, purchasePrice, arv, propertyType } = inputs;
