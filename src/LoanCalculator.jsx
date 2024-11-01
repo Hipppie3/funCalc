@@ -44,13 +44,13 @@ const LoanCalculator = () => {
             arv: parseInt(inputs.arv.replace(/,/g, '')) || 0
         };
 
-        try {
-            const response = await axios.post('http://localhost:5001/calculate-loan', sanitizedInputs);
-            setLoanAmount(response.data.loanAmount);
-            generateFormula(response.data.loanAmount);
-        } catch (error) {
-            console.error("Error calculating loan:", error);
-        }
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/calculate-loan`, sanitizedInputs);
+        setLoanAmount(response.data.loanAmount);
+        generateFormula(response.data.loanAmount);
+    } catch (error) {
+        console.error("Error calculating loan:", error);
+    }
     };
 
     const generateFormula = (calculatedLoanAmount) => {

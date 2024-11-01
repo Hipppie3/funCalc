@@ -5,10 +5,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/calculate-loan': {
-        target: 'http://localhost:5001',
+      '/api': {
+        target: 'https://calcbackend-7f93fbe43039.herokuapp.com',
         changeOrigin: true,
-        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '')
       },
     },
   },
